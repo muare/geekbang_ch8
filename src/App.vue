@@ -1,5 +1,7 @@
 <template>
     <div id="app">
+      <input v-model="message">
+      <input :value="message" @input="handleChange">
         {{message}} {{message+message}}
         <div :id="message"></div>
         <!-- <ul>
@@ -44,6 +46,9 @@ export default {
     };
   },
   methods: {
+    handleChange(e) {
+      this.message = e.target.value
+    },
     handleDelete(val) {
       console.log("handle delete", val);
     },
