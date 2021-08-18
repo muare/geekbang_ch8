@@ -1,28 +1,53 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div id="app">
+        {{message}} {{message+message}}
+        <div :id="message"></div>
+        <!-- <ul>
+            <todo-item v-for="item in list" :title="item.title" :del="item.del"></todo-item>
+        </ul> -->
+        <todo-list>
+            <todo-item @delete="handleDelete" v-for="item in list" :title="item.title" :del="item.del" :key="item.title">                                
+                <template v-slot:pre-icon="{value}">
+                    <span >PREICON {{value}}</span>               
+                </template>
+                <template v-slot:post-icon>
+                    <span >POSTICON</span>
+                </template>
+            </todo-item>
+        </todo-list>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TodoList from "./components/TodoList.vue";
+import TodoItem from "./components/TodoItem.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    TodoList,
+    TodoItem
+  },
+  data() {
+    return {
+      message: "hello world",
+      list: [
+        {
+          title: "course 1",
+          del: false,
+        },
+        {
+          title: "course 2",
+          del: true,
+        },
+      ],
+    };
+  },
+  methods: {
+    handleDelete(val) {
+      console.log("handle delete", val);
+    },
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
