@@ -17,18 +17,22 @@
                 </template>
             </todo-item>
         </todo-list>
+        <directives></directives>
     </div>
+    
 </template>
 
 <script>
 import TodoList from "./components/TodoList.vue";
 import TodoItem from "./components/TodoItem.vue";
+import Directives from "./components/Directives.vue"
 
 export default {
   name: "App",
   components: {
     TodoList,
-    TodoItem
+    TodoItem,
+    Directives,
   },
   data() {
     return {
